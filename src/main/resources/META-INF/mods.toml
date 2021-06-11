@@ -27,6 +27,13 @@ description="This mod adds compatibilty for the Wireless Grid and Curios."
     side="BOTH"
 
 [[dependencies.refinedcurios]]
+    modId="refinedstorageaddons"
+    mandatory=false
+    versionRange="[0.7.3,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.refinedcurios]]
     modId="forge"
     mandatory=true
     versionRange="[34.1.0,)"

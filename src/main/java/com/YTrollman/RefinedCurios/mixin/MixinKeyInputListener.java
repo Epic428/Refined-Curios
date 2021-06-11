@@ -5,6 +5,7 @@ import com.refinedmods.refinedstorage.RS;
 import com.refinedmods.refinedstorage.RSItems;
 import com.refinedmods.refinedstorage.network.OpenNetworkItemMessage;
 import com.refinedmods.refinedstorage.screen.KeyInputListener;
+import com.refinedmods.refinedstorageaddons.RSAddonsItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.IInventory;
@@ -12,6 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraftforge.fml.ModList;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import top.theillusivec4.curios.api.CuriosApi;
@@ -52,6 +54,18 @@ public class MixinKeyInputListener {
             RS.NETWORK_HANDLER.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
         }
 
+        if(ModList.get().isLoaded("refinedstorageaddons"))
+        {
+            if(CuriosApi.getCuriosHelper().findEquippedCurio(RSAddonsItems.WIRELESS_CRAFTING_GRID, ((LivingEntity)Minecraft.getInstance().player)).isPresent()) {
+                slotFound = 0;
+                RS.NETWORK_HANDLER.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
+            }
+            if(CuriosApi.getCuriosHelper().findEquippedCurio(RSAddonsItems.CREATIVE_WIRELESS_CRAFTING_GRID, ((LivingEntity)Minecraft.getInstance().player)).isPresent()) {
+                slotFound = 0;
+                RS.NETWORK_HANDLER.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
+            }
+        }
+
         if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.WIRELESS_FLUID_GRID.get(), ((LivingEntity)Minecraft.getInstance().player)).isPresent()) {
             slotFound = 1;
             RS.NETWORK_HANDLER.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
@@ -67,6 +81,15 @@ public class MixinKeyInputListener {
         }
         if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.CREATIVE_WIRELESS_CRAFTING_MONITOR.get(), ((LivingEntity)Minecraft.getInstance().player)).isPresent()) {
             slotFound = 2;
+            RS.NETWORK_HANDLER.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
+        }
+
+        if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.PORTABLE_GRID.get(), ((LivingEntity)Minecraft.getInstance().player)).isPresent()) {
+            slotFound = 3;
+            RS.NETWORK_HANDLER.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
+        }
+        if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.CREATIVE_PORTABLE_GRID.get(), ((LivingEntity)Minecraft.getInstance().player)).isPresent()) {
+            slotFound = 3;
             RS.NETWORK_HANDLER.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
         }
 

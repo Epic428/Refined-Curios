@@ -127,13 +127,14 @@ dependencies {
     runtimeOnly fg.deobf("mezz.jei:jei-1.16.4:${jei_version}")
 
     compile fg.deobf("com.refinedmods:refinedstorage:${rs_version}")
+    implementation fg.deobf("curse.maven:refinedstorageaddons-272302:3065694")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api")
+
     runtimeOnly fg.deobf("curse.maven:creativewirelesstransmitter-452645:3342327")
     runtimeOnly fg.deobf("curse.maven:storagedrawers-223852:3180569")
     implementation fg.deobf("curse.maven:powah-352656:3232535")
     implementation fg.deobf("curse.maven:lollipop-347954:3232534")
-
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..

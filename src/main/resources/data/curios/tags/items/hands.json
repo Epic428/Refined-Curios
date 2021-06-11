@@ -8,6 +8,13 @@
     "refinedstorage:creative_wireless_fluid_grid",
 
     "refinedstorage:wireless_crafting_monitor",
-    "refinedstorage:creative_wireless_crafting_monitor"
+    "refinedstorage:creative_wireless_crafting_monitor",
+
+    "refinedstorage:portable_grid",
+    "refinedstorage:creative_portable_grid"
+  ],
+  "optional": [
+    "refinedstorageaddons:wireless_crafting_grid",
+    "refinedstorageaddons:creative_wireless_crafting_grid"
   ]
 }
