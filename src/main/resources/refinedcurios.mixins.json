@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.YTrollman.RefinedCurios.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+	"MixinKeyInputListener",
+    "MixinNetworkHandler",
+    "MixinWirelessCraftingMonitorContainerFactory"
+  ],
+  "minVersion": "0.8"
+}

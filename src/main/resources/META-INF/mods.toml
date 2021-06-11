@@ -1,0 +1,41 @@
+modLoader="javafml"
+loaderVersion="[34,)"
+license="MIT"
+issueTrackerURL="https://github.com/starforcraft/Refined-Curios/issues/new/choose"
+[[mods]]
+modId="refinedcurios"
+version="${file.jarVersion}"
+displayName="Refined Curios"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/refined-curios"
+logoFile="logo.png"
+credits="Thanks for downloading this mod."
+authors="YTrollman"
+description="This mod adds compatibilty for the Wireless Grid and Curios."
+
+[[dependencies.refinedcurios]]
+    modId="curios"
+    mandatory=true
+    versionRange="[1.16.5-4.0.5.2,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.refinedcurios]]
+    modId="refinedstorage"
+    mandatory=true
+    versionRange="[1.9,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.refinedcurios]]
+    modId="forge"
+    mandatory=true
+    versionRange="[34.1.0,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.refinedcurios]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16,)"
+    ordering="NONE"
+    side="BOTH"
