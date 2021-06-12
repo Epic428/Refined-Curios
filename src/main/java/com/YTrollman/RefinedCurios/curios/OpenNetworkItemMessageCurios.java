@@ -35,137 +35,131 @@ public class OpenNetworkItemMessageCurios {
         ServerPlayerEntity player = ((NetworkEvent.Context)ctx.get()).getSender();
         if (player != null) {
             ((NetworkEvent.Context)ctx.get()).enqueueWork(() -> {
-                if(Minecraft.class != null)
+                if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.WIRELESS_GRID.get(), Minecraft.getInstance().player).isPresent()) {
+                    ItemStack stack = CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.WIRELESS_GRID.get(), Minecraft.getInstance().player).get().getRight();
+                    if (stack.getItem() instanceof NetworkItem) {
+                        ((NetworkItem) stack.getItem()).applyNetwork(player.getServer(), stack, (n) -> {
+                            n.getNetworkItemManager().open(player, stack, message.slotId);
+                        }, (err) -> {
+                            player.sendMessage(err, player.getUUID());
+                        });
+                    } else if (stack.getItem() instanceof PortableGridBlockItem) {
+                        API.instance().getGridManager().openGrid(PortableGridGridFactory.ID, player, stack, message.slotId);
+                    }
+                }
+                if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.CREATIVE_WIRELESS_GRID.get(), Minecraft.getInstance().player).isPresent()) {
+                    ItemStack stack = CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.CREATIVE_WIRELESS_GRID.get(), Minecraft.getInstance().player).get().getRight();
+                    if (stack.getItem() instanceof NetworkItem) {
+                        ((NetworkItem) stack.getItem()).applyNetwork(player.getServer(), stack, (n) -> {
+                            n.getNetworkItemManager().open(player, stack, message.slotId);
+                        }, (err) -> {
+                            player.sendMessage(err, player.getUUID());
+                        });
+                    } else if (stack.getItem() instanceof PortableGridBlockItem) {
+                        API.instance().getGridManager().openGrid(PortableGridGridFactory.ID, player, stack, message.slotId);
+                    }
+                }
+
+                if(ModList.get().isLoaded("refinedstorageaddons"))
                 {
-                    if(Minecraft.getInstance().level != null && Minecraft.getInstance().level.isClientSide)
-                    {
-                        if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.WIRELESS_GRID.get(), Minecraft.getInstance().player).isPresent()) {
-                            ItemStack stack = CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.WIRELESS_GRID.get(), Minecraft.getInstance().player).get().getRight();
-                            if (stack.getItem() instanceof NetworkItem) {
-                                ((NetworkItem) stack.getItem()).applyNetwork(player.getServer(), stack, (n) -> {
-                                    n.getNetworkItemManager().open(player, stack, message.slotId);
-                                }, (err) -> {
-                                    player.sendMessage(err, player.getUUID());
-                                });
-                            } else if (stack.getItem() instanceof PortableGridBlockItem) {
-                                API.instance().getGridManager().openGrid(PortableGridGridFactory.ID, player, stack, message.slotId);
-                            }
+                    if(CuriosApi.getCuriosHelper().findEquippedCurio(RSAddonsItems.WIRELESS_CRAFTING_GRID, Minecraft.getInstance().player).isPresent()) {
+                        ItemStack stack = CuriosApi.getCuriosHelper().findEquippedCurio(RSAddonsItems.WIRELESS_CRAFTING_GRID, Minecraft.getInstance().player).get().getRight();
+                        if (stack.getItem() instanceof NetworkItem) {
+                            ((NetworkItem) stack.getItem()).applyNetwork(player.getServer(), stack, (n) -> {
+                                n.getNetworkItemManager().open(player, stack, message.slotId);
+                            }, (err) -> {
+                                player.sendMessage(err, player.getUUID());
+                            });
+                        } else if (stack.getItem() instanceof PortableGridBlockItem) {
+                            API.instance().getGridManager().openGrid(PortableGridGridFactory.ID, player, stack, message.slotId);
                         }
-                        if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.CREATIVE_WIRELESS_GRID.get(), Minecraft.getInstance().player).isPresent()) {
-                            ItemStack stack = CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.CREATIVE_WIRELESS_GRID.get(), Minecraft.getInstance().player).get().getRight();
-                            if (stack.getItem() instanceof NetworkItem) {
-                                ((NetworkItem) stack.getItem()).applyNetwork(player.getServer(), stack, (n) -> {
-                                    n.getNetworkItemManager().open(player, stack, message.slotId);
-                                }, (err) -> {
-                                    player.sendMessage(err, player.getUUID());
-                                });
-                            } else if (stack.getItem() instanceof PortableGridBlockItem) {
-                                API.instance().getGridManager().openGrid(PortableGridGridFactory.ID, player, stack, message.slotId);
-                            }
+                    }
+                    if(CuriosApi.getCuriosHelper().findEquippedCurio(RSAddonsItems.CREATIVE_WIRELESS_CRAFTING_GRID, Minecraft.getInstance().player).isPresent()) {
+                        ItemStack stack = CuriosApi.getCuriosHelper().findEquippedCurio(RSAddonsItems.CREATIVE_WIRELESS_CRAFTING_GRID, Minecraft.getInstance().player).get().getRight();
+                        if (stack.getItem() instanceof NetworkItem) {
+                            ((NetworkItem) stack.getItem()).applyNetwork(player.getServer(), stack, (n) -> {
+                                n.getNetworkItemManager().open(player, stack, message.slotId);
+                            }, (err) -> {
+                                player.sendMessage(err, player.getUUID());
+                            });
+                        } else if (stack.getItem() instanceof PortableGridBlockItem) {
+                            API.instance().getGridManager().openGrid(PortableGridGridFactory.ID, player, stack, message.slotId);
                         }
+                    }
+                }
 
-                        if(ModList.get().isLoaded("refinedstorageaddons"))
-                        {
-                            if(CuriosApi.getCuriosHelper().findEquippedCurio(RSAddonsItems.WIRELESS_CRAFTING_GRID, Minecraft.getInstance().player).isPresent()) {
-                                ItemStack stack = CuriosApi.getCuriosHelper().findEquippedCurio(RSAddonsItems.WIRELESS_CRAFTING_GRID, Minecraft.getInstance().player).get().getRight();
-                                if (stack.getItem() instanceof NetworkItem) {
-                                    ((NetworkItem) stack.getItem()).applyNetwork(player.getServer(), stack, (n) -> {
-                                        n.getNetworkItemManager().open(player, stack, message.slotId);
-                                    }, (err) -> {
-                                        player.sendMessage(err, player.getUUID());
-                                    });
-                                } else if (stack.getItem() instanceof PortableGridBlockItem) {
-                                    API.instance().getGridManager().openGrid(PortableGridGridFactory.ID, player, stack, message.slotId);
-                                }
-                            }
-                            if(CuriosApi.getCuriosHelper().findEquippedCurio(RSAddonsItems.CREATIVE_WIRELESS_CRAFTING_GRID, Minecraft.getInstance().player).isPresent()) {
-                                ItemStack stack = CuriosApi.getCuriosHelper().findEquippedCurio(RSAddonsItems.CREATIVE_WIRELESS_CRAFTING_GRID, Minecraft.getInstance().player).get().getRight();
-                                if (stack.getItem() instanceof NetworkItem) {
-                                    ((NetworkItem) stack.getItem()).applyNetwork(player.getServer(), stack, (n) -> {
-                                        n.getNetworkItemManager().open(player, stack, message.slotId);
-                                    }, (err) -> {
-                                        player.sendMessage(err, player.getUUID());
-                                    });
-                                } else if (stack.getItem() instanceof PortableGridBlockItem) {
-                                    API.instance().getGridManager().openGrid(PortableGridGridFactory.ID, player, stack, message.slotId);
-                                }
-                            }
-                        }
+                if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.WIRELESS_FLUID_GRID.get(), Minecraft.getInstance().player).isPresent()) {
+                    ItemStack stack = CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.WIRELESS_FLUID_GRID.get(), Minecraft.getInstance().player).get().getRight();
+                    if (stack.getItem() instanceof NetworkItem) {
+                        ((NetworkItem) stack.getItem()).applyNetwork(player.getServer(), stack, (n) -> {
+                            n.getNetworkItemManager().open(player, stack, message.slotId);
+                        }, (err) -> {
+                            player.sendMessage(err, player.getUUID());
+                        });
+                    } else if (stack.getItem() instanceof PortableGridBlockItem) {
+                        API.instance().getGridManager().openGrid(PortableGridGridFactory.ID, player, stack, message.slotId);
+                    }
+                }
+                if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.CREATIVE_WIRELESS_FLUID_GRID.get(), Minecraft.getInstance().player).isPresent()) {
+                    ItemStack stack = CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.CREATIVE_WIRELESS_FLUID_GRID.get(), Minecraft.getInstance().player).get().getRight();
+                    if (stack.getItem() instanceof NetworkItem) {
+                        ((NetworkItem) stack.getItem()).applyNetwork(player.getServer(), stack, (n) -> {
+                            n.getNetworkItemManager().open(player, stack, message.slotId);
+                        }, (err) -> {
+                            player.sendMessage(err, player.getUUID());
+                        });
+                    } else if (stack.getItem() instanceof PortableGridBlockItem) {
+                        API.instance().getGridManager().openGrid(PortableGridGridFactory.ID, player, stack, message.slotId);
+                    }
+                }
 
-                        if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.WIRELESS_FLUID_GRID.get(), Minecraft.getInstance().player).isPresent()) {
-                            ItemStack stack = CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.WIRELESS_FLUID_GRID.get(), Minecraft.getInstance().player).get().getRight();
-                            if (stack.getItem() instanceof NetworkItem) {
-                                ((NetworkItem) stack.getItem()).applyNetwork(player.getServer(), stack, (n) -> {
-                                    n.getNetworkItemManager().open(player, stack, message.slotId);
-                                }, (err) -> {
-                                    player.sendMessage(err, player.getUUID());
-                                });
-                            } else if (stack.getItem() instanceof PortableGridBlockItem) {
-                                API.instance().getGridManager().openGrid(PortableGridGridFactory.ID, player, stack, message.slotId);
-                            }
-                        }
-                        if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.CREATIVE_WIRELESS_FLUID_GRID.get(), Minecraft.getInstance().player).isPresent()) {
-                            ItemStack stack = CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.CREATIVE_WIRELESS_FLUID_GRID.get(), Minecraft.getInstance().player).get().getRight();
-                            if (stack.getItem() instanceof NetworkItem) {
-                                ((NetworkItem) stack.getItem()).applyNetwork(player.getServer(), stack, (n) -> {
-                                    n.getNetworkItemManager().open(player, stack, message.slotId);
-                                }, (err) -> {
-                                    player.sendMessage(err, player.getUUID());
-                                });
-                            } else if (stack.getItem() instanceof PortableGridBlockItem) {
-                                API.instance().getGridManager().openGrid(PortableGridGridFactory.ID, player, stack, message.slotId);
-                            }
-                        }
+                if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.WIRELESS_CRAFTING_MONITOR.get(), Minecraft.getInstance().player).isPresent()) {
+                    ItemStack stack = CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.WIRELESS_CRAFTING_MONITOR.get(), Minecraft.getInstance().player).get().getRight();
+                    if (stack.getItem() instanceof NetworkItem) {
+                        ((NetworkItem) stack.getItem()).applyNetwork(player.getServer(), stack, (n) -> {
+                            n.getNetworkItemManager().open(player, stack, message.slotId);
+                        }, (err) -> {
+                            player.sendMessage(err, player.getUUID());
+                        });
+                    } else if (stack.getItem() instanceof PortableGridBlockItem) {
+                        API.instance().getGridManager().openGrid(PortableGridGridFactory.ID, player, stack, message.slotId);
+                    }
+                }
+                if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.CREATIVE_WIRELESS_CRAFTING_MONITOR.get(), Minecraft.getInstance().player).isPresent()) {
+                    ItemStack stack = CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.CREATIVE_WIRELESS_CRAFTING_MONITOR.get(), Minecraft.getInstance().player).get().getRight();
+                    if (stack.getItem() instanceof NetworkItem) {
+                        ((NetworkItem) stack.getItem()).applyNetwork(player.getServer(), stack, (n) -> {
+                            n.getNetworkItemManager().open(player, stack, message.slotId);
+                        }, (err) -> {
+                            player.sendMessage(err, player.getUUID());
+                        });
+                    } else if (stack.getItem() instanceof PortableGridBlockItem) {
+                        API.instance().getGridManager().openGrid(PortableGridGridFactory.ID, player, stack, message.slotId);
+                    }
+                }
 
-                        if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.WIRELESS_CRAFTING_MONITOR.get(), Minecraft.getInstance().player).isPresent()) {
-                            ItemStack stack = CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.WIRELESS_CRAFTING_MONITOR.get(), Minecraft.getInstance().player).get().getRight();
-                            if (stack.getItem() instanceof NetworkItem) {
-                                ((NetworkItem) stack.getItem()).applyNetwork(player.getServer(), stack, (n) -> {
-                                    n.getNetworkItemManager().open(player, stack, message.slotId);
-                                }, (err) -> {
-                                    player.sendMessage(err, player.getUUID());
-                                });
-                            } else if (stack.getItem() instanceof PortableGridBlockItem) {
-                                API.instance().getGridManager().openGrid(PortableGridGridFactory.ID, player, stack, message.slotId);
-                            }
-                        }
-                        if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.CREATIVE_WIRELESS_CRAFTING_MONITOR.get(), Minecraft.getInstance().player).isPresent()) {
-                            ItemStack stack = CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.CREATIVE_WIRELESS_CRAFTING_MONITOR.get(), Minecraft.getInstance().player).get().getRight();
-                            if (stack.getItem() instanceof NetworkItem) {
-                                ((NetworkItem) stack.getItem()).applyNetwork(player.getServer(), stack, (n) -> {
-                                    n.getNetworkItemManager().open(player, stack, message.slotId);
-                                }, (err) -> {
-                                    player.sendMessage(err, player.getUUID());
-                                });
-                            } else if (stack.getItem() instanceof PortableGridBlockItem) {
-                                API.instance().getGridManager().openGrid(PortableGridGridFactory.ID, player, stack, message.slotId);
-                            }
-                        }
-
-                        if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.PORTABLE_GRID.get(), Minecraft.getInstance().player).isPresent()) {
-                            ItemStack stack = CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.PORTABLE_GRID.get(), Minecraft.getInstance().player).get().getRight();
-                            if (stack.getItem() instanceof NetworkItem) {
-                                ((NetworkItem) stack.getItem()).applyNetwork(player.getServer(), stack, (n) -> {
-                                    n.getNetworkItemManager().open(player, stack, message.slotId);
-                                }, (err) -> {
-                                    player.sendMessage(err, player.getUUID());
-                                });
-                            } else if (stack.getItem() instanceof PortableGridBlockItem) {
-                                API.instance().getGridManager().openGrid(PortableGridGridFactory.ID, player, stack, message.slotId);
-                            }
-                        }
-                        if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.CREATIVE_PORTABLE_GRID.get(), Minecraft.getInstance().player).isPresent()) {
-                            ItemStack stack = CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.CREATIVE_PORTABLE_GRID.get(), Minecraft.getInstance().player).get().getRight();
-                            if (stack.getItem() instanceof NetworkItem) {
-                                ((NetworkItem) stack.getItem()).applyNetwork(player.getServer(), stack, (n) -> {
-                                    n.getNetworkItemManager().open(player, stack, message.slotId);
-                                }, (err) -> {
-                                    player.sendMessage(err, player.getUUID());
-                                });
-                            } else if (stack.getItem() instanceof PortableGridBlockItem) {
-                                API.instance().getGridManager().openGrid(PortableGridGridFactory.ID, player, stack, message.slotId);
-                            }
-                        }
+                if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.PORTABLE_GRID.get(), Minecraft.getInstance().player).isPresent()) {
+                    ItemStack stack = CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.PORTABLE_GRID.get(), Minecraft.getInstance().player).get().getRight();
+                    if (stack.getItem() instanceof NetworkItem) {
+                        ((NetworkItem) stack.getItem()).applyNetwork(player.getServer(), stack, (n) -> {
+                            n.getNetworkItemManager().open(player, stack, message.slotId);
+                        }, (err) -> {
+                            player.sendMessage(err, player.getUUID());
+                        });
+                    } else if (stack.getItem() instanceof PortableGridBlockItem) {
+                        API.instance().getGridManager().openGrid(PortableGridGridFactory.ID, player, stack, message.slotId);
+                    }
+                }
+                if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.CREATIVE_PORTABLE_GRID.get(), Minecraft.getInstance().player).isPresent()) {
+                    ItemStack stack = CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.CREATIVE_PORTABLE_GRID.get(), Minecraft.getInstance().player).get().getRight();
+                    if (stack.getItem() instanceof NetworkItem) {
+                        ((NetworkItem) stack.getItem()).applyNetwork(player.getServer(), stack, (n) -> {
+                            n.getNetworkItemManager().open(player, stack, message.slotId);
+                        }, (err) -> {
+                            player.sendMessage(err, player.getUUID());
+                        });
+                    } else if (stack.getItem() instanceof PortableGridBlockItem) {
+                        API.instance().getGridManager().openGrid(PortableGridGridFactory.ID, player, stack, message.slotId);
                     }
                 }
             });

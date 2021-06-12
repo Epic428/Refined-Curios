@@ -1,6 +1,6 @@
 package com.YTrollman.RefinedCurios.curios;
 
-import com.YTrollman.RefinedCurios.RefinedCurios;
+import com.YTrollman.RefinedCurios.setup.NetworkHandler;
 import com.refinedmods.refinedstorage.RSItems;
 import com.refinedmods.refinedstorage.RSKeyBindings;
 import com.refinedmods.refinedstorageaddons.RSAddonsItems;
@@ -63,50 +63,50 @@ public class KeyInputListener {
 
         if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.WIRELESS_GRID.get(), Minecraft.getInstance().player).isPresent()) {
             slotFound = 0;
-            RefinedCurios.NETWORK_HANDLER.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
+            NetworkHandler.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
         }
         if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.CREATIVE_WIRELESS_GRID.get(), Minecraft.getInstance().player).isPresent()) {
             slotFound = 0;
-            RefinedCurios.NETWORK_HANDLER.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
+            NetworkHandler.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
         }
 
         if(ModList.get().isLoaded("refinedstorageaddons"))
         {
             if(CuriosApi.getCuriosHelper().findEquippedCurio(RSAddonsItems.WIRELESS_CRAFTING_GRID, Minecraft.getInstance().player).isPresent()) {
                 slotFound = 0;
-                RefinedCurios.NETWORK_HANDLER.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
+                NetworkHandler.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
             }
             if(CuriosApi.getCuriosHelper().findEquippedCurio(RSAddonsItems.CREATIVE_WIRELESS_CRAFTING_GRID, Minecraft.getInstance().player).isPresent()) {
                 slotFound = 0;
-                RefinedCurios.NETWORK_HANDLER.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
+                NetworkHandler.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
             }
         }
 
         if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.WIRELESS_FLUID_GRID.get(), Minecraft.getInstance().player).isPresent()) {
             slotFound = 1;
-            RefinedCurios.NETWORK_HANDLER.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
+            NetworkHandler.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
         }
         if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.CREATIVE_WIRELESS_FLUID_GRID.get(), Minecraft.getInstance().player).isPresent()) {
             slotFound = 1;
-            RefinedCurios.NETWORK_HANDLER.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
+            NetworkHandler.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
         }
 
         if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.WIRELESS_CRAFTING_MONITOR.get(), Minecraft.getInstance().player).isPresent()) {
             slotFound = 2;
-            RefinedCurios.NETWORK_HANDLER.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
+            NetworkHandler.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
         }
         if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.CREATIVE_WIRELESS_CRAFTING_MONITOR.get(), Minecraft.getInstance().player).isPresent()) {
             slotFound = 2;
-            RefinedCurios.NETWORK_HANDLER.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
+            NetworkHandler.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
         }
 
         if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.PORTABLE_GRID.get(), Minecraft.getInstance().player).isPresent()) {
             slotFound = 3;
-            RefinedCurios.NETWORK_HANDLER.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
+            NetworkHandler.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
         }
         if(CuriosApi.getCuriosHelper().findEquippedCurio(RSItems.CREATIVE_PORTABLE_GRID.get(), Minecraft.getInstance().player).isPresent()) {
             slotFound = 3;
-            RefinedCurios.NETWORK_HANDLER.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
+            NetworkHandler.sendToServer(new OpenNetworkItemMessageCurios(slotFound));
         }
 
         if (slotFound == -1) {

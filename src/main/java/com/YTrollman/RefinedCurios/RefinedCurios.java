@@ -16,21 +16,21 @@ import org.apache.logging.log4j.Logger;
 @Mod("refinedcurios")
 public class RefinedCurios {
     public static final String MOD_ID = "refinedcurios";
-    public static final NetworkHandler NETWORK_HANDLER = new NetworkHandler();
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
     public RefinedCurios() {
-        CuriosIntegrationModComms.registerMod(FMLJavaModLoadingContext.get().getModEventBus());
-
-        MinecraftForge.EVENT_BUS.register(this);
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+
+        CuriosIntegrationModComms.registerMod(FMLJavaModLoadingContext.get().getModEventBus());
+
+        MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void setup(final FMLCommonSetupEvent event)
     {
-        RefinedCurios.NETWORK_HANDLER.register();
+        NetworkHandler.register();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) 
