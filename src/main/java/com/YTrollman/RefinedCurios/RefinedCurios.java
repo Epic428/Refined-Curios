@@ -1,6 +1,8 @@
 package com.YTrollman.RefinedCurios;
 
 import com.YTrollman.RefinedCurios.curios.CuriosIntegrationModComms;
+import com.YTrollman.RefinedCurios.curios.KeyInputListener;
+import com.YTrollman.RefinedCurios.setup.NetworkHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -14,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 @Mod("refinedcurios")
 public class RefinedCurios {
     public static final String MOD_ID = "refinedcurios";
+    public static final NetworkHandler NETWORK_HANDLER = new NetworkHandler();
     public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
     public RefinedCurios() {
@@ -27,12 +30,12 @@ public class RefinedCurios {
 
     private void setup(final FMLCommonSetupEvent event)
     {
-    	
+        RefinedCurios.NETWORK_HANDLER.register();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) 
     {
-    	
+        MinecraftForge.EVENT_BUS.register(new KeyInputListener());
     }
 
     @SubscribeEvent
